@@ -1,40 +1,39 @@
 # Checkpoint - Express
 
-Firstly, don't stress out that we will be using this test to judge you in any way except to understand how we can better help you.
+Primero que nada, vamos a usar este test para ver el estado actual del curso y como ayudarlo, no es para evaluar ni juzgar a nadie.
 
-Also, we ask that you don't help each other or cheat.  Feel free to use any online resource but don't copy/paste answers to each other or if you find something similar online.
+Este ejercicio es personal, no pidan ayuda a sus compañeros. Siéntanse libres de buscar ayuda en internet pero no copien y peguen código que no entiendan.
 
-## Resources
+## Recursos
 
-The following resources are allowed:
+Pueden ayudarse de cualquiera de los siguientes recursos:
 
-* Any notes you've taken so far.
-* Any code you have in your previous projects.
-* learn.fullstackacademy.com.
-* All the slide decks that we've used in class.
+* Cualquier nota o apunte que hayan tomado.
+* Los ejercicio que hayamos hecho antes.
+* Los repositorios en GitHub con toda la teoría.
+* Las 'slides' que hayamos pasado de las clases.
 
-## Things we're testing
+## ¿Que estamos testeando?
 
-* Express app architecture 
-* Express routing
+* Arquitectura de aplicaciones con Express 
+* Ruteos con Express
 
-## Starting
+## Para empezar
 
-1. Fork this repository to your own Github user account.
-2. Clone this to your local machine.
+1. Hace un `fork` de este repositorio en tu propia cuenta de GitHub.
+2. Clonalo el repositorio a tu maquina.
 3. `npm install`
-4. You can run `npm test` which will continuously run the test suite upon file updates.
-5. Read through the project structure, you'll be primarily working in `models/todos.js`, `routes/index.js`, and `app.js`.
-6. Start working through the tests in `test/`. Make sure to change an `xit` to an `it` to change any given spec from pending to active.
-7. `git commit` often as you make progress on the tests.
+4. Podes correr `npm test` para ejecutar los test que quedaran activos y escuchando cambios.
+5. Revisen la estructura del proyecto, principalmente vamos a estar trabajando con `models/todos.js`, `routes/index.js`, y `app.js`.
+6. Empiecen a trabajar en base a los specs de `test/`. Cambien el `xit` por un `it` cuando el test este listo para correr.
+7. Hagan `git commit` a medida que van pasando los test 
 
-These tests include [supertest](https://github.com/visionmedia/supertest).
+Estos test incluyen [supertest](https://github.com/visionmedia/supertest).
 
-## Submitting
+## Finalizar
 
-As you complete each answer (or make an update), please commit the changes to the git repository.  To submit your answers:
+A medida que vayan completando los puntos van a ir commiteando sus cambios y finalmente cuando lo tengan terminado van a tener que:
 
-1. Keep all specs active. 
-2. Push your repository back to your own personal fork.
-3. Before the deadline, `git commit -am 'submission for deadline'`
-4. `git push`
+1. Pasar todos los spects a activos.
+2. Hacer un ultimo commit `git commit -am 'entrega'`.
+3. Pusheen el repositorio hacia el fork que hicieron originalmente.

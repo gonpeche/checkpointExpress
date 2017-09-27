@@ -7,7 +7,7 @@
     "test": "mocha --watch test/**.js", 
     "grade": "mocha --reporter spec --timeout 300 test/*.js"
   },
-  "author": "",
+  "author": "plataforma5",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.13.0",

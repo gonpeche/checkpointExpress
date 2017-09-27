@@ -12,38 +12,38 @@ describe('Todo routes', function() {
   });
 
   describe('`/users` URI', function() {
-    xit('GET responds with an empty array at first', function() {
-      // when we make requests to `/users` we will get back an empty array
-      return supertest // supertest object lets us make & test HTTP req/res
-        .get('/users') // makes an HTTP request: GET '/users'
-        .expect(200) // tests response status code
-        .expect('Content-Type', /json/) // tests response header
+    xit('GET responde con un array vacío de entrada', function() {
+      // cuando hacemos un request a `/users` recibimos un arreglo vacio
+      return supertest // supertest nos permite hacer y testear requests HTTP
+        .get('/users') // hacemos un request HTTP: GET a '/users'
+        .expect(200) // el codigo de status del response
+        .expect('Content-Type', /json/) // podemos testear los headers
         .expect(function(res) {
-          expect(res.body).to.eql([]); // tests response body
+          expect(res.body).to.eql([]); // testeamos la respuesta con el body
         });
     });
 
-    xit('GET responds with a person after a task has been added', function() {
-      todos.add('zeke', { content: 'a task' });
+    xit('GET responde con una persona después de que se agrega una tarea', function() {
+      todos.add('toni', { content: 'comprar mogul' });
       return supertest
         .get('/users')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function(res) {
-          expect(res.body).to.eql(['zeke']);
+          expect(res.body).to.eql(['toni']);
         });
     });
 
-    xit('GET responds with everyone who has tasks', function() {
-      todos.add('zeke', { content: 'a task' });
-      todos.add('omri', { content: 'some other task' });
-      todos.add('gabe', { content: 'yet more tasks' });
+    xit('GET responde con todo el que tenga una tarea', function() {
+      todos.add('santi', { content: 'comprar medialunas' });
+      todos.add('guille', { content: 'hacer un chivito' });
+      todos.add('facu', { content: 'comprar caramelos' });
       return supertest
         .get('/users')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function(res) {
-          expect(res.body).to.eql(['zeke', 'omri', 'gabe']);
+          expect(res.body).to.eql(['santi', 'guille', 'facu']);
         });
     });
 
@@ -51,139 +51,139 @@ describe('Todo routes', function() {
 
   describe('`/users/:name/tasks` URI', function() {
 
-    xit('GET lists all tasks for a specific user', function() {
-      todos.add('dave', { content: 'task 1 for dave' });
-      todos.add('joe', { content: 'task 1 for joe', complete: true });
-      todos.add('joe', { content: 'task 2 for joe' });
+    xit('GET devuelve una lista con las tareas de cierto usuario', function() {
+      todos.add('pinky', { content: '1er tarea de pinky' });
+      todos.add('alan', { content: '1er tarea de alan', complete: true });
+      todos.add('alan', { content: '2da tarea de alan' });
       return supertest
-        .get('/users/joe/tasks')
+        .get('/users/alan/tasks')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function(res) {
           expect(res.body).to.have.length(2);
-          expect(res.body[0].content).to.equal('task 1 for joe');
+          expect(res.body[0].content).to.equal('1er tarea de alan');
           expect(res.body[0].complete).to.be.true;
-          expect(res.body[1].content).to.equal('task 2 for joe');
+          expect(res.body[1].content).to.equal('2da tarea de alan');
           expect(res.body[1].complete).to.be.false;
         });
     });
 
-    xit('POST creates a new task for that user & responds with the created task', function() {
+    xit('POST crea una nueva tarea para ese usuario y devuelve dicha tarea', function() {
       return supertest
-        .post('/users/sarah/tasks')
-        .send({ content: 'a new task for sarah'}) // the HTTP request body
-        .expect(201) // you'll have to customize the status yourself
+        .post('/users/doge/tasks')
+        .send({ content: 'tarea de doge'}) // el body del request HTTP
+        .expect(201) // van a tener que asignar ese status ustedes mismos
         .expect('Content-Type', /json/)
         .expect(function(res) {
           expect(res.body).to.eql({
-            content: 'a new task for sarah',
+            content: 'tarea de doge',
             complete: false
           });
-          expect(todos.list('sarah')).to.have.length(1);
-          expect(todos.list('sarah')[0]).to.eql({
-            content: 'a new task for sarah',
+          expect(todos.list('doge')).to.have.length(1);
+          expect(todos.list('doge')[0]).to.eql({
+            content: 'tarea de doge',
             complete: false
           });
         });
     });
 
-    xit('POST respects pre-existing completion status', function() {
+    xit('POST respeta el estado pre establecido para la tarea', function() {
       return supertest
-        .post('/users/sarah/tasks')
-        .send({ content: 'a new task for sarah', complete: true}) // the HTTP request body
-        .expect(201) // you'll have to customize the status yourself
+        .post('/users/toni/tasks')
+        .send({ content: 'traer milanesa tucumana', complete: true}) // el body del request
+        .expect(201)
         .expect('Content-Type', /json/)
         .expect(function(res) {
           expect(res.body).to.eql({
-            content: 'a new task for sarah',
+            content: 'traer milanesa tucumana',
             complete: true
           });
-          expect(todos.list('sarah')).to.have.length(1);
-          expect(todos.list('sarah')[0]).to.eql({
-            content: 'a new task for sarah',
+          expect(todos.list('toni')).to.have.length(1);
+          expect(todos.list('toni')[0]).to.eql({
+            content: 'traer milanesa tucumana',
             complete: true
           });
         });
     });
 
-    describe('query filtering (?key=value)', function () {
+    describe('filtro de query (?key=value)', function () {
 
       beforeEach(function () {
-        todos.add('billy', { content: 'learn about req.query' });
-        todos.complete('billy', 0);
-        todos.add('billy', { content: 'enable requests for specific todos' });
+        todos.add('solano', { content: 'aprender que tiene req.query' });
+        todos.complete('solano', 0);
+        todos.add('solano', { content: 'habilitar request para tareas especificas' });
       });
 
-      xit('GET can get just the completed tasks', function () {
+      xit('GET puede pedir solo las tareas completas', function () {
         return supertest
-          .get('/users/billy/tasks?status=complete')
+          .get('/users/solano/tasks?status=complete')
           .expect(200)
           .expect('Content-Type', /json/)
           .expect(function(res) {
-            expect(res.body).to.have.length(1);
-            expect(res.body[0].content).to.equal('learn about req.query');
+            expect(res.body).to.have.length(1); // devuelve solo 1 tarea
+            expect(res.body[0].content).to.equal('aprender que tiene req.query'); // y es la tarea completada
           });
       });
 
-      xit('GET can get just the active (incomplete) tasks', function () {
+      xit('GET podemos pedir solo las tareas activas (incompletas)', function () {
         return supertest
-          .get('/users/billy/tasks?status=active')
+          .get('/users/solano/tasks?status=active')
           .expect(200)
           .expect('Content-Type', /json/)
           .expect(function(res) {
-            expect(res.body).to.have.length(1);
-            expect(res.body[0].content).to.equal('enable requests for specific todos');
+            expect(res.body).to.have.length(1); // también trae solo 1
+            expect(res.body[0].content).to.equal('habilitar request para tareas especificas'); // y es la tarea activa
           });
       });
     });
 
     describe('`/:index` URI', function() {
 
-      xit('PUT marks a specific task as complete', function() {
-        todos.add('nimit', { content: 't0' });
-        todos.add('nimit', { content: 't1' });
-        todos.add('nimit', { content: 't2' });
+      xit('PUT asigna una tarea como completa', function() {
+        todos.add('santi', { content: 't0' });
+        todos.add('santi', { content: 't1' });
+        todos.add('santi', { content: 't2' });
 
         return supertest
-          .put('/users/nimit/tasks/1')
+          .put('/users/santi/tasks/1') // indica con el indice a que tarea apunto
           .expect(200)
           .expect(function() {
-            expect(todos.list('nimit')[0].complete).to.be.false;
-            expect(todos.list('nimit')[1].complete).to.be.true;
-            expect(todos.list('nimit')[2].complete).to.be.false;
+            expect(todos.list('santi')[0].complete).to.be.false;
+            expect(todos.list('santi')[1].complete).to.be.true; // y se completa
+            expect(todos.list('santi')[2].complete).to.be.false;
           });
       });
 
-      xit('DELETE removes a specific task', function() {
-        todos.add('david', { content: 'interview fellows' });
-        todos.add('david', { content: 'judge stackathon' });
-        todos.add('david', { content: 'code review' });
+      xit('DELETE borra una tarea', function() {
+        todos.add('guille', { content: 'dar lecture' });
+        todos.add('guille', { content: 'ayudar con el workshop' });
+        todos.add('guille', { content: 'hacer el review' });
 
         return supertest
-          .delete('/users/david/tasks/1')
+          .delete('/users/guille/tasks/1')
           .expect(204)
           .expect(function() {
-            expect(todos.list('david')).to.have.length(2);
-            expect(todos.list('david')[0].content).to.equal('interview fellows');
-            expect(todos.list('david')[1].content).to.equal('code review');
+            expect(todos.list('guille')).to.have.length(2);
+            expect(todos.list('guille')[0].content).to.equal('dar lecture');
+            expect(todos.list('guille')[1].content).to.equal('hacer el review');
           });
       });
     });
 
-    describe('error handling', function() {
+    describe('manejo de errores', function() {
 
-      xit('responds with a 404 if a user does not exist', function () {
+      xit('responde con status 404 si el usuaio no existe', function () {
         return supertest
-          .get('/users/obama/tasks')
+          .get('/users/messi/tasks')
           .expect(404);
       });
 
-      xit('responds with a 400 if you attempt to add a todo with non-standard field', function () {
+      xit('responde con status 400 si se trata de agregar una tarea con propiedades erroneas', function () {
         return supertest
           .post('/users/bob/tasks')
           .send({
-            content: 'is one of the allowed fields',
-            wrong: 'is neither `content` nor `complete` and so is disallowed'
+            content: '`content` es una propiedad valida',
+            wrong: '`wrong` no es ninguna de las que esperábamos'
           })
           .expect(400);
       });

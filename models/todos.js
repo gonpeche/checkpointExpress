@@ -1,17 +1,17 @@
 'use strict';
 
-var tasks = {}; // a place to store tasks by person
+var tasks = {}; // acá vamos a guardar nuestras personas y tareas
 
 module.exports = {
   reset: function () {
-    tasks = {}; // (this function is completed for you.)
+    tasks = {}; // esta función ya esta armada :D
   },
   // ==== COMPLETE THE FOLLOWING (SEE `model.js` TEST SPEC) =====
   listPeople: function () {
-    // returns an array of all people for whom tasks exist
+    // devuelve un arreglo de personas con tareas
   },
   add: function (name, task) {
-    // saves a task for a given person
+    // guarda una tarea para una persona en particular
   }
   // etc.
 };

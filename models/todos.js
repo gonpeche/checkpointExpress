@@ -6,7 +6,7 @@ module.exports = {
   reset: function () {
     tasks = {}; // esta función ya esta armada :D
   },
-  // ==== COMPLETE THE FOLLOWING (SEE `model.js` TEST SPEC) =====
+  // ==== COMPLETEN LAS SIGUIENTES FUNCIONES (vean los test de `model.js`) =====
   listPeople: function () {
     // devuelve un arreglo de personas con tareas
   },

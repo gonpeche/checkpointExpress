@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 
-// importo el lista de 'to do's'
+// importo la lista de 'to do's'
 var Todos = require('../models/todos');
 describe('To do model', function() {
 

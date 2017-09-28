@@ -42,7 +42,8 @@ describe('To do model', function() {
   });
 
   describe('`complete`', function() {
-    xit('un booleano que ponemos como `false` cada vez que ingresa una nueva tarea', function() {
+    xit('la propiedad `complete` es un booleano que ponemos como `false`\
+      cada vez que ingresa una nueva tarea', function() {
       Todos.add('santi', { content: 'bañarse' });
       expect(Todos.list('santi')[0].complete).to.be.false;
     });

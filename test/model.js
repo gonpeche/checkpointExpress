@@ -12,7 +12,7 @@ describe('To do model', function() {
   });
 
   describe('`listPeople` y `add`', function() {
-    xit('inicialmente devuelve un arreglo vacío', function() {
+    it('inicialmente devuelve un arreglo vacío', function() {
       expect(Todos.listPeople()).to.eql([]);
     });
 

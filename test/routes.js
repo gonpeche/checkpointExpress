@@ -12,7 +12,7 @@ describe('Todo routes', function() {
   });
 
   describe('`/users` URI', function() {
-    xit('GET responde con un array vacío de entrada', function() {
+    it('GET responde con un array vacío de entrada', function() {
       // cuando hacemos un request a `/users` recibimos un arreglo vacio
       return supertest // supertest nos permite hacer y testear requests HTTP
         .get('/users') // hacemos un request HTTP: GET a '/users'
@@ -23,7 +23,7 @@ describe('Todo routes', function() {
         });
     });
 
-    xit('GET responde con una persona después de que se agrega una tarea', function() {
+    it('GET responde con una persona después de que se agrega una tarea', function() {
       todos.add('toni', { content: 'comprar mogul' });
       return supertest
         .get('/users')
@@ -34,7 +34,7 @@ describe('Todo routes', function() {
         });
     });
 
-    xit('GET responde con todo el que tenga una tarea', function() {
+    it('GET responde con todo el que tenga una tarea', function() {
       todos.add('santi', { content: 'comprar medialunas' });
       todos.add('guille', { content: 'hacer un chivito' });
       todos.add('facu', { content: 'comprar caramelos' });
@@ -51,7 +51,7 @@ describe('Todo routes', function() {
 
   describe('`/users/:name/tasks` URI', function() {
 
-    xit('GET devuelve una lista con las tareas de cierto usuario', function() {
+    it('GET devuelve una lista con las tareas de cierto usuario', function() {
       todos.add('pinky', { content: '1er tarea de pinky' });
       todos.add('alan', { content: '1er tarea de alan', complete: true });
       todos.add('alan', { content: '2da tarea de alan' });
@@ -68,7 +68,7 @@ describe('Todo routes', function() {
         });
     });
 
-    xit('POST crea una nueva tarea para ese usuario y devuelve dicha tarea', function() {
+    it('POST crea una nueva tarea para ese usuario y devuelve dicha tarea', function() {
       return supertest
         .post('/users/doge/tasks')
         .send({ content: 'tarea de doge'}) // el body del request HTTP
@@ -87,7 +87,7 @@ describe('Todo routes', function() {
         });
     });
 
-    xit('POST respeta el estado pre establecido para la tarea', function() {
+    it('POST respeta el estado pre establecido para la tarea', function() {
       return supertest
         .post('/users/toni/tasks')
         .send({ content: 'traer milanesa tucumana', complete: true}) // el body del request
@@ -114,7 +114,7 @@ describe('Todo routes', function() {
         todos.add('solano', { content: 'habilitar request para tareas especificas' });
       });
 
-      xit('GET puede pedir solo las tareas completas', function () {
+      it('GET puede pedir solo las tareas completas', function () {
         return supertest
           .get('/users/solano/tasks?status=complete')
           .expect(200)
@@ -125,7 +125,7 @@ describe('Todo routes', function() {
           });
       });
 
-      xit('GET podemos pedir solo las tareas activas (incompletas)', function () {
+      it('GET podemos pedir solo las tareas activas (incompletas)', function () {
         return supertest
           .get('/users/solano/tasks?status=active')
           .expect(200)
@@ -139,7 +139,7 @@ describe('Todo routes', function() {
 
     describe('`/:index` URI', function() {
 
-      xit('PUT asigna una tarea como completa', function() {
+      it('PUT asigna una tarea como completa', function() {
         todos.add('santi', { content: 't0' });
         todos.add('santi', { content: 't1' });
         todos.add('santi', { content: 't2' });
@@ -154,7 +154,7 @@ describe('Todo routes', function() {
           });
       });
 
-      xit('DELETE borra una tarea', function() {
+      it('DELETE borra una tarea', function() {
         todos.add('guille', { content: 'dar lecture' });
         todos.add('guille', { content: 'ayudar con el workshop' });
         todos.add('guille', { content: 'hacer el review' });
@@ -172,13 +172,13 @@ describe('Todo routes', function() {
 
     describe('manejo de errores', function() {
 
-      xit('responde con status 404 si el usuaio no existe', function () {
+      it('responde con status 404 si el usuario no existe', function () {
         return supertest
           .get('/users/messi/tasks')
           .expect(404);
       });
 
-      xit('responde con status 400 si se trata de agregar una tarea con propiedades erroneas', function () {
+      it('responde con status 400 si se trata de agregar una tarea con propiedades erroneas', function () {
         return supertest
           .post('/users/bob/tasks')
           .send({
